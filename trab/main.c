@@ -31,7 +31,6 @@ int main () {
 
     inicializa(n,matriz, matriz_parcial);
     r_graph(input,n,m,matriz, arestas);
-    fclose(input);
     b_insertionsort(arestas, m);
     resultado = arvore_minima(n,m,matriz,matriz_parcial,arestas);
     info(resultado);
@@ -64,9 +63,7 @@ void b_insertionsort(aresta *v, int m) {
                 direita = meio;
         }
         for ( j = i; j > esquerda; j-- ) {
-            v[j].u = v[j-1].u;
-            v[j].v = v[j-1].v;
-            v[j].peso = v[j-1].peso;
+            v[j] = v[j-1];
         }
         v[direita] = auxiliar;        
     }
