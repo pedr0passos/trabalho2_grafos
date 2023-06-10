@@ -14,7 +14,7 @@ int arvore_minima(int n, int m, int matriz[n][n], int matriz_parcial[n][n], ares
 void b_insertionsort(aresta *v, int m);
 void atualiza_florestas(int n, int *florestas, int matriz[n][n]);
 void conta(int n, int matriz[n][n], int vertice, int *florestas, int cont);
-void info(int resultado);
+void info(int resultado, int n, int matriz[n][n]);
 
 int main () {
 
@@ -22,7 +22,7 @@ int main () {
     int n, m;
 
     // lendo valores n e m
-    FILE *input=fopen("input/input.txt", "r");
+    FILE *input=fopen("input/6.txt", "r");
     fscanf(input, "%d %d\n", &n, &m);
 
     // criando matriz e vetor com as arestas
@@ -33,7 +33,7 @@ int main () {
     r_graph(input,n,m,matriz, arestas);
     b_insertionsort(arestas, m);
     resultado = arvore_minima(n,m,matriz,matriz_parcial,arestas);
-    info(resultado);
+    info(resultado, n,matriz_parcial);
     
     return 0;
 }
@@ -69,7 +69,14 @@ void b_insertionsort(aresta *v, int m) {
     }
 }
 
-void info(int resultado) {
+void info(int resultado, int n, int matriz[n][n]) {
+    int i, j;
+    printf("-------------------------\n");
+    for(i=0; i<n; i++)
+        for(j=i; j<n; j++)
+            if(matriz[i][j]>0)
+                printf("(%d,%d):%d\n",i,j,matriz[i][j]);
+    printf("-------------------------\n");                
     printf("%d\n", resultado);
 }
 
