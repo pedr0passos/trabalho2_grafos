@@ -22,7 +22,7 @@ int main () {
     int n, m;
 
     // lendo valores n e m
-    FILE *input=fopen("input/6.txt", "r");
+    FILE *input=fopen("input/9.txt", "r");
     fscanf(input, "%d %d\n", &n, &m);
 
     // criando matriz e vetor com as arestas
@@ -45,7 +45,6 @@ void inicializa(int n, int matriz[n][n], int matriz_parcial[n][n]) {
             matriz[i][j]=0;
             matriz_parcial[i][j]=0;
         }
-    
 }
 
 void b_insertionsort(aresta *v, int m) {
@@ -62,9 +61,8 @@ void b_insertionsort(aresta *v, int m) {
             else    
                 direita = meio;
         }
-        for ( j = i; j > esquerda; j-- ) {
+        for (j=i; j > esquerda; j--)
             v[j] = v[j-1];
-        }
         v[direita] = auxiliar;        
     }
 }
@@ -94,14 +92,14 @@ void r_graph(FILE* input, int n, int m, int matriz[n][n], aresta *a) {
 }
 
 int arvore_minima(int n, int m, int matriz[n][n], int matriz_parcial[n][n], aresta *a) {
-    int i,j, floresta[n], soma=0;
-    atualiza_florestas(n,floresta,matriz_parcial);
+    int i, florestas[n], soma=0;
+    atualiza_florestas(n,florestas,matriz_parcial);
     for (i=0; i<m; i++)
-        if ( floresta[a[i].u] != floresta[a[i].v] ) {
+        if ( florestas[a[i].u] != florestas[a[i].v] ) {
             matriz_parcial[a[i].u][a[i].v]=a[i].peso;
             matriz_parcial[a[i].v][a[i].u]=a[i].peso;
             soma += a[i].peso;
-            atualiza_florestas(n,floresta,matriz_parcial);
+            atualiza_florestas(n,florestas,matriz_parcial);
         }
     return soma;
 }
