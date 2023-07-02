@@ -23,7 +23,7 @@ int main () {
     int n, m;
 
     // lendo valores n e m
-    FILE *input=fopen("input/3.txt", "r");
+    FILE *input=fopen("input/9.txt", "r");
     fscanf(input, "%d %d\n", &n, &m);
 
     // criando matriz e vetor com as arestas
@@ -104,7 +104,7 @@ void r_graph(FILE* input, int n, int m, int matriz[n][n], aresta *a) {
 int arvore_minima(int n, int m, int matriz[n][n], int matriz_parcial[n][n], aresta *a) {
     int i, arvores[n], soma=0, qt_arvores;
     qt_arvores=atualiza_arvores(n,arvores,matriz_parcial);
-    for (i=0; i<m || qt_arvores>1; i++)
+    for (i=0; i<m && qt_arvores>1; i++)
         if ( arvores[a[i].u] != arvores[a[i].v] ) {
             matriz_parcial[a[i].u][a[i].v]=a[i].peso;
             matriz_parcial[a[i].v][a[i].u]=a[i].peso;
